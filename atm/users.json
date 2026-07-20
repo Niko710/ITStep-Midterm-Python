@@ -1,0 +1,92 @@
+{
+    "users": [
+        {
+            "id": 1001,
+            "username": "mvance",
+            "password": "password123",
+            "first_name": "Marcus",
+            "last_name": "Vance",
+            "balance": 2450.75
+        },
+        {
+            "id": 1002,
+            "username": "erostova",
+            "password": "elenaPass2024",
+            "first_name": "Elena",
+            "last_name": "Rostova",
+            "balance": 18200.5
+        },
+        {
+            "id": 1003,
+            "username": "dchen",
+            "password": "mySecurePin99",
+            "first_name": "Devon",
+            "last_name": "Chen",
+            "balance": 45.1
+        },
+        {
+            "id": 1004,
+            "username": "aokafor",
+            "password": "amaraPassword1",
+            "first_name": "Amara",
+            "last_name": "Okafor",
+            "balance": 890.0
+        },
+        {
+            "id": 1005,
+            "username": "lsilva",
+            "password": "lucasPass55",
+            "first_name": "Lucas",
+            "last_name": "Silva",
+            "balance": 0.0
+        },
+        {
+            "id": 1006,
+            "username": "sjenkins",
+            "password": "sarahSecret321",
+            "first_name": "Sarah",
+            "last_name": "Jenkins",
+            "balance": 5410.25
+        },
+        {
+            "id": 1007,
+            "username": "apatel",
+            "password": "aaravPass88",
+            "first_name": "Aarav",
+            "last_name": "Patel",
+            "balance": 120.8
+        },
+        {
+            "id": 1008,
+            "username": "cdubois",
+            "password": "chloeMasterKey",
+            "first_name": "Chloe",
+            "last_name": "Dubois",
+            "balance": 31500.0
+        },
+        {
+            "id": 1009,
+            "username": "mgomez",
+            "password": "mateoPassword12",
+            "first_name": "Mateo",
+            "last_name": "Gomez",
+            "balance": 612.45
+        },
+        {
+            "id": 1010,
+            "username": "hlindqvist",
+            "password": "hannaPass00",
+            "first_name": "Hanna",
+            "last_name": "Lindqvist",
+            "balance": 1420.3
+        },
+        {
+            "id": 1011,
+            "username": "niko717",
+            "password": "niko7676",
+            "first_name": "Niko",
+            "last_name": "Ptskialadze",
+            "balance": 77.0
+        }
+    ]
+}
