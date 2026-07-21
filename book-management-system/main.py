@@ -44,22 +44,23 @@ class BookManager:
     """
     BookManager manages Book objects, adds Book to the list, lists all books and searches book by title
     """
-    books = {}
+    books = []
 
     # Adding book to system
     @classmethod
     def add_book(cls, book: Book) -> None:
-        cls.books[book.title.lower()] = book
+        cls.books.append(book)
     
     # Listing all books in system
     @classmethod
     def list_books(cls) -> list[Book]:
-        return list(cls.books.values())
+        return cls.books
 
     # Searching book by user input
     @classmethod
-    def find_book(cls, search: str) -> Book | str:
-        result: Book | str = cls.books.get(search.lower(), "Not Found")
+    def find_book(cls, search: str) -> list:
+        search = search.strip().lower()
+        result: list = [b for b in cls.books if search in b.title.lower()]
         return result
     
 
@@ -80,8 +81,11 @@ def main():
         elif action == "find":
             title: str = input("Enter book title to search: ")
             print("Searching for your book...")
-            result: Book | str = BookManager.find_book(title)
-            print(result)
+            result: list = BookManager.find_book(title)
+            if not result:
+                print("Not found!")
+            else:
+                for b in result: print(b)
 
         elif action == "exit":
             print("Thank you for using our system! Have a nice day!")
