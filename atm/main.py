@@ -43,12 +43,15 @@ def get_username() -> str:
     users = read_database()
     while True:
         username = input("Enter your username: ").strip()
-        for user in users["users"]:
-            if username == user["username"]:
-                print("Username is already taken, try another username")
-                break
+        if username:
+            for user in users["users"]:
+                if username == user["username"]:
+                    print("Username is already taken, try another username")
+                    break
+            else:
+                return username
         else:
-            return username
+            print("Invalid username, try again...")
 
 # validating password
 def get_password() -> str:
