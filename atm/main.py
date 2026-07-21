@@ -1,7 +1,8 @@
 import json
+from pathlib import Path
 
 
-DATABASE = "users.json"
+DATABASE = Path(__file__).parent/"users.json"
 
 # reading database and returning it, with creating, if it doesn't exist
 def read_database():
