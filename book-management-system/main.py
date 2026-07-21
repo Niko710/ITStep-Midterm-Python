@@ -27,7 +27,10 @@ def get_publish_year() -> int:
     
 
 class Book:
-    def __init__(self, title, author, year) -> None:
+    """
+    Created Book object, takes 3 arguments (title, author, list)
+    """
+    def __init__(self, title: str, author: str, year: int) -> None:
         self.title = title
         self.author = author
         self.publish_year = year
@@ -38,6 +41,9 @@ class Book:
         
 
 class BookManager:
+    """
+    BookManager manages Book objects, adds Book to the list, lists all books and searches book by title
+    """
     books = {}
 
     # Adding book to system
