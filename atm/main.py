@@ -16,8 +16,8 @@ class DecimalEncoder(json.JSONEncoder):
     
 
 def decode_decimal(dct: dict):
-    if dct.get("balance") and dct.get("balance") is not None:
-        dct["balance"] = Decimal(dct["balance"])
+    if dct.get("balance") is not None:
+        dct["balance"] = Decimal(str(dct["balance"]))
 
     return dct
 
@@ -137,8 +137,8 @@ def deposit(user: dict):
         print("Invalid datatype. Amount must be float or int!")
         return
 
-    if amount <= 0:
-        print("Amount is incorrect, must be > 0")
+    if not amount.is_finite() or amount <= 0:
+        print("Amount must be a finite number greater than 0.")
         return
 
     user["balance"] += amount
@@ -156,8 +156,8 @@ def withdraw(user: dict):
         print("Invalid datatype. Amount must be float or int!")
         return
 
-    if amount <= 0:
-        print("Amount is incorrect, must be > 0")
+    if not amount.is_finite() or amount <= 0:
+        print("Amount must be a finite number greater than 0.")
         return
 
     if amount > user["balance"]:
