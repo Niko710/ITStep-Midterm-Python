@@ -1,14 +1,32 @@
 import json
 from pathlib import Path
+from decimal import Decimal, InvalidOperation
+from typing import Any
 
 
 DATABASE = Path(__file__).parent/"users.json"
+
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o: Any) -> Any:
+        if isinstance(o, Decimal):
+            return str(o)
+        
+        return super().default(o)
+    
+
+def decode_decimal(dct: dict):
+    if dct.get("balance") and dct.get("balance") is not None:
+        dct["balance"] = Decimal(dct["balance"])
+
+    return dct
+
 
 # reading database and returning it, with creating, if it doesn't exist
 def read_database():
     try:
         with open(DATABASE, mode="r", encoding="utf-8") as f:
-            users: dict = json.load(f)
+            users: dict = json.load(f, object_hook=decode_decimal)
         return users
     except FileNotFoundError:
         with open(DATABASE, mode="w", encoding="utf-8") as f:
@@ -16,7 +34,7 @@ def read_database():
                 "users": []
             }
 
-            json.dump(structure, f)
+            json.dump(structure, f, cls=DecimalEncoder, indent=4)
         
         return structure
 
@@ -30,7 +48,7 @@ def save_changes_database(user: dict):
             break
     
     with open(DATABASE, mode="w", encoding="utf-8") as f:
-        json.dump(users, f, indent=4)
+        json.dump(users, f, indent=4, cls=DecimalEncoder)
 
 # generate unique id for registration
 def generate_id(user_list: list[dict]) -> int:
@@ -72,13 +90,13 @@ def create_user():
         "password": get_password(),
         "first_name": input("Enter your first name: ").strip().capitalize(),
         "last_name": input("Enter your last name: ").strip().capitalize(),
-        "balance": 0.0
+        "balance": Decimal()
     }
 
     users["users"].append(new_user)
 
     with open(DATABASE, mode="w", encoding="utf-8") as f:
-        json.dump(users, f, indent=4)
+        json.dump(users, f, indent=4, cls=DecimalEncoder)
 
     return new_user
 
@@ -114,8 +132,8 @@ def deposit(user: dict):
     amount = input("Please, enter amount to deposite: ")
     
     try:
-        amount = float(amount)
-    except ValueError:
+        amount = Decimal(amount)
+    except InvalidOperation:
         print("Invalid datatype. Amount must be float or int!")
         return
 
@@ -133,8 +151,8 @@ def withdraw(user: dict):
     amount = input("Please, enter amount to withdraw: ")
 
     try:
-        amount = float(amount)
-    except ValueError:
+        amount = Decimal(amount)
+    except InvalidOperation:
         print("Invalid datatype. Amount must be float or int!")
         return
 
