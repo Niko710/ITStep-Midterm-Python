@@ -1,15 +1,16 @@
 import json, os
+from pathlib import Path
 
 
 LANGUAGES = ("geo-eng", "eng-geo")
 
 
-def read_json(filename: str):
+def read_json(filename: str | Path):
     with open(filename, mode="r", encoding="utf-8") as f:
         return json.load(f)
     
 
-def translate(to_translate: list[str], dictionary: dict, filename: str) -> str:
+def translate(to_translate: list[str], dictionary: dict, filename: str | Path) -> str:
     # Translation which will be outputed
     translated_words = []
 
@@ -32,10 +33,10 @@ def translate(to_translate: list[str], dictionary: dict, filename: str) -> str:
     return " ".join(translated_words)
 
 
-def add_word(word: str, filename: str, data: dict) -> str:
+def add_word(word: str, filename: str | Path, data: dict) -> str:
     translation = input(f"Please, input translation for word '{word}': ").strip().lower()
     data[word.lower()] = translation
-    tmp_filename = "tmp.json"
+    tmp_filename = Path(__file__).parent/"tmp.json"
     
     try:
         with open(tmp_filename, mode="w", encoding="utf-8") as f:
@@ -78,7 +79,7 @@ def main():
     user_text = input("Please, input the the text or word, which needs to be translated: ").split()
 
     # Read translate data from json file
-    filename = f"{LANGUAGES[user_language]}.json"
+    filename = Path(__file__).parent/f"{LANGUAGES[user_language]}.json"
 
     try:
         language_dictionary = read_json(filename)
