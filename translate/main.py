@@ -56,40 +56,49 @@ def add_word(word: str, filename: str | Path, data: dict) -> str:
         
 
 def main():
-    # Listing all available options
-    for i, o in enumerate(LANGUAGES):
-        print(f"{i} - {o}")
+    while True:
 
-    # User inputs choice
-    user_language = input("Please, choose translating languages (Enter index): ")
+        # Listing all available options
+        for i, o in enumerate(LANGUAGES):
+            print(f"{i} - {o}")
 
-    # Validation of user choice, must be decimal
-    if not user_language.isdigit():
-        print("Index must be strictly integer type, listed in list above!")
-        return
+        # User inputs choice
+        user_language = input("Please, choose translating languages (Enter index): ")
 
-    user_language = int(user_language)
-    
-    # Validation if language choice is out of range
-    if user_language < 0 or user_language >= len(LANGUAGES):
-        print("Error! Index is out of range!")
-        return
-    
-    # User inputs word/text, we convert it to list for convenience using split() method
-    user_text = input("Please, input the the text or word, which needs to be translated: ").split()
+        # Validation of user choice, must be decimal
+        if not user_language.isdigit():
+            print("Index must be strictly integer type, listed in list above!")
+            return
 
-    # Read translate data from json file
-    filename = Path(__file__).parent/f"{LANGUAGES[user_language]}.json"
+        user_language = int(user_language)
+        
+        # Validation if language choice is out of range
+        if user_language < 0 or user_language >= len(LANGUAGES):
+            print("Error! Index is out of range!")
+            return
+        
+        # User inputs word/text, we convert it to list for convenience using split() method
+        user_text = input("Please, input the the text or word, which needs to be translated: ").split()
 
-    try:
-        language_dictionary = read_json(filename)
-    except FileNotFoundError:
-        print(f"File {filename} was not found!")
-        return
+        # Read translate data from json file
+        filename = Path(__file__).parent/f"{LANGUAGES[user_language]}.json"
 
-    final_output = translate(user_text, language_dictionary, filename)
+        try:
+            language_dictionary = read_json(filename)
+        except FileNotFoundError:
+            print(f"File {filename} was not found!")
+            return
 
-    print(final_output)
+        final_output = translate(user_text, language_dictionary, filename)
+
+        print(final_output, end="\n\n")
+
+        if input("If you want to continue, enter y: ").strip().lower() == "y":
+            continue
+        else:
+            print("Thank you for using our translator!")
+            break
+
 
 
 if __name__ == "__main__":
