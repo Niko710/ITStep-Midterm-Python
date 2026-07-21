@@ -1,7 +1,7 @@
 # Validating title input
 def get_title() -> str:
     while True:
-        user_input = input("Enter book title: ").strip().capitalize()
+        user_input = input("Enter book title: ").strip()
         if user_input:
             return user_input
         else:
@@ -10,7 +10,7 @@ def get_title() -> str:
 # Validationg author input
 def get_author() -> str:
     while True:
-        user_input = input("Enter book author: ").strip().capitalize()
+        user_input = input("Enter book author: ").strip()
         if user_input:
             return user_input
         else:
@@ -31,8 +31,8 @@ class Book:
     Created Book object, takes 3 arguments (title, author, list)
     """
     def __init__(self, title: str, author: str, year: int) -> None:
-        self.title = title
-        self.author = author
+        self.title = title.capitalize()
+        self.author = author.title()
         self.publish_year = year
     
     # Clear and informative represenation of book
