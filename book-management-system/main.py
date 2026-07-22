@@ -66,22 +66,23 @@ class BookManager:
 
 def main():
     print("Welcome to book management system!")
+    book_manager = BookManager()
 
     while True:
         action = input("Please, choose your action (add/list/find/exit): ").strip().lower()
 
         if action == "add":
-            BookManager.add_book(Book(get_title(), get_author(), get_publish_year()))
+            book_manager.add_book(Book(get_title(), get_author(), get_publish_year()))
             print("Book was added successfully!")
 
         elif action == "list":
             print("Listing all books:")
-            for book in BookManager.list_books(): print(book)
+            for book in book_manager.list_books(): print(book)
 
         elif action == "find":
             title: str = input("Enter book title to search: ")
             print("Searching for your book...")
-            result: list = BookManager.find_book(title)
+            result: list = book_manager.find_book(title)
             if not result:
                 print("Not found!")
             else:
