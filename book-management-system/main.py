@@ -33,23 +33,6 @@ def get_publish_year() -> int:
         return int(user_input)
     
 
-# Getting path to database
-def get_database() -> Path:
-    filename = Path(__file__).parent/"database.json"
-
-    if filename.exists():
-        return filename
-    
-    structure = {
-        "books": []
-    }
-
-    with open(filename, mode="w", encoding="utf-8") as f:
-        json.dump(structure, f, cls=BookEncoder)
-
-    return filename
-    
-
 class Book:
     """
     Created Book object, takes 3 arguments (title, author, list)
@@ -69,7 +52,24 @@ class BookManager:
     BookManager manages Book objects, adds Book to the list, lists all books and searches book by title
     """
     def __init__(self) -> None:
-        self.database: Path = get_database()
+        self.database: Path = self._get_database()
+
+    # Getting path to database
+    @staticmethod
+    def _get_database() -> Path:
+        filename = Path(__file__).parent/"database.json"
+
+        if filename.exists():
+            return filename
+        
+        structure = {
+            "books": []
+        }
+
+        with open(filename, mode="w", encoding="utf-8") as f:
+            json.dump(structure, f, cls=BookEncoder)
+
+        return filename
 
 
     # Adding book to database
