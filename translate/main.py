@@ -10,9 +10,17 @@ def read_json(filename: str | Path):
         return json.load(f)
     
 
-def translate(to_translate: list[str], dictionary: dict, filename: str | Path) -> str:
+def translate(to_translate, dictionary: dict, filename: str | Path) -> str:
     # Translation which will be outputed
     translated_words = []
+
+    # If it is a phrase, translate it directly
+    if dictionary.get(to_translate):
+        return dictionary[to_translate]
+    
+    # Splitting sentence to distinct words
+    to_translate = to_translate.split()
+
 
     # Search user inputed words in dictionary
     for i in to_translate:
@@ -78,7 +86,7 @@ def main():
             return
         
         # User inputs word/text, we convert it to list for convenience using split() method
-        user_text = input("Please, input the the text or word, which needs to be translated: ").split()
+        user_text = input("Please, input the the text or word, which needs to be translated: ").strip().lower()
 
         # Read translate data from json file
         filename = Path(__file__).parent/f"{LANGUAGES[user_language]}.json"
