@@ -38,7 +38,7 @@
             "password": "lucasPass55",
             "first_name": "Lucas",
             "last_name": "Silva",
-            "balance": 0.0
+            "balance": "0.0"
         },
         {
             "id": 1006,
@@ -103,6 +103,14 @@
             "first_name": "Golaso",
             "last_name": "Siuu",
             "balance": "39.45"
+        },
+        {
+            "id": 1014,
+            "username": "testuser",
+            "password": "12345678",
+            "first_name": "Test",
+            "last_name": "Test",
+            "balance": "0"
         }
     ]
 }

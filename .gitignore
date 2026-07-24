@@ -1,1 +1,15 @@
-.venv
+# Virtual Environments (DO NOT COMMIT)
+.venv/
+env/
+venv/
+
+# uv internal cache
+.uv/
+
+# Byte-compiled / optimized files
+__pycache__/
+*.pyc
+
+# Build outputs (if you ever run uv build)
+dist/
+*.egg-info/
